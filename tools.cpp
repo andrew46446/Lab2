@@ -5,13 +5,22 @@
 using namespace std;
 string Func()
 {	
-cout << "Enter the path to file\n";
+	cout << "Enter the path to file\n";
 	string path;
 	cin >> path;
-	string s;
-	std::ifstream in(path); 
-	std::cout << s << std::endl;
-	cout << s << "(length: " << s.length() << ")" << std::endl;
+	/*ifstream in(path); 
+	cout << s << "(length: " << s.length() << ")" << endl;
 	in.close();
-	return s;
+	return s;*/
+	string s;
+    ifstream ifs(path);
+    if(ifs.is_open())
+    {
+        s.assign((istreambuf_iterator<char>(ifs.rdbuf())), istreambuf_iterator<char>());
+        cout << s<<endl;
+        ifs.close();
+    }
+    else
+        cerr << "Unable to open file" << endl;
+    return s;
 }
